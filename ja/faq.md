@@ -4,34 +4,34 @@ title: Riot FAQ
 description: Questions and Answers about Riot, User Interface (UI) Micro-Libary
 ---
 
-## Frequently asked questions
+## よくある質問と答え
 
-### Why is this project called Riot?
-Riot is against the current trend of boilerplate and unneeded complexity. We think that a small, powerful API and concise syntax are extremely important things on a client-side library. Riot provides also an un-opinionated stack that gives developers the freedom to work with the best technology they like.
+### なんで Riot(=反乱) という名前なの？
+Riotは、ボイラープレート(=雛形、決まり文句)と、不要な複雑さにまみれた現在の潮流に「反旗」を翻すプロジェクトです。クライアントサイドのライブラリでは、小さくパワフルなAPIと分かりやすい文法が、何にも増して重要だと我々は考えています。Riot は開発者にとって好みの最高のテクノロジーを使って開発をするための自由を彼らに与える、柔軟なスタックも提供します。
 
-### Is Riot free?
-Riot is free, open source and licensed under the MIT License.
+### Riot はフリー？
+Riot はフリーです。オープンソース であり、MIT ライセンスで許可されています。
 
-### Can I use Riot in production?
-Absolutely. The project is enough mature.
+### Riot を本番環境で使うことはできるか？
+もちろん。このプロジェクトは十分に成熟しています。
 
-### Which browsers are supported?
+### どのブラウザをサポートしているの？
 
-Riot.js 4 supports all the major modern browsers. Browsers like IE11 are not supported: if you need to support such old browsers you might consider using an [older Riot version](/v3)
+Riot.js 4 全ての主要なモダンブラウザをサポートしています。IE11 のようなブラウザはサポートしていません: もしあなたがそのような古いブラウザをサポートする必要があるならば、[古い Riot のバージョン](/ja/v3) の使用を検討するかもしれません。
 
-### Should I use dash on the tag name?
-W3C specification demands you use a dash in the tag name. Instead of `<person>` you must write `<my-person>`. Obey this rule if you care about W3C. Both work fine.
+### タグ名にダッシュをを使うべき？
+W3C 仕様 はタグ名にダッシュを使うことを要求しています。`<person>` の代わりに `<my-person>` を書かなければなりません。W3C を気にするのであれば、このルールに従いましょう。ただしRiot はどちらでも動作します。
 
-### Why are there no semicolons in the source code?
-Leaving out semicolons makes the code less crowded. This is aligned with our general minimalistic approach. We use single quotes for the same reason. If you contribute to Riot, please leave out semicolons and double quotes.
+### なんでソースコードにセミコロンがないの？
+セミコロンをなくすと、コードがちょっとすっきりします。これは、私たちのミニマリストアプローチに沿ったものです。同じ理由で、シングルクオートを使います。もし、Riotに貢献するなら、セミコロンとダブルコーテーションを使わないでください。
 
-### Can I use `style` tags in a .riot file?
-Yes. You can use CSS normally inside a riot tag file. The web component standard also has a mechanism of encapsulating of CSS. However, it's unlikely that this improves the overall manageability of your CSS.
+### .riot ファイルで `style` タグは使える？
+はい。riot のタグの中でも、通常通り CSS を使うことができます。Web Component標準でも CSS のカプセル化機構を備えています。しかし、これにより CSS の全体的な管理性が向上するとは考えにくいです。
 
-### Isn't `onclick` evil?
-It's not evil, it just looks "old". To have JS and HTML under the same module is more important than aesthetics. The minimal Riot syntax makes event handlers look decent.
+### `onclick` は悪ではない？
+悪ではないですが、ただ "古く" 見えます。同じモジュール内に JS と HTML を置くことは、美しさよりも重要になります。最小限の Riot 構文はイベントハンドラをしっかりしたものに見せます。
 
-### Any future plans?
+### 今後のプランは？
 
-Sure. The Riot core doesn't provide much out of the box but the `riot.install` method allows us plugging in new features. A bunch of Riot plugins to enhance the default components API is on my TODO list.
+もちろんです。 Riot のコアはi箱から出してそのままでは提供できませんが、`riot.install` メソッドを使えば新しい機能を追加することができます。デフォルトのコンポーネントAPIを拡張するためのたくさんの Riot プラグインが私の TODO です。
 
