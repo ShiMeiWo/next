@@ -83,9 +83,18 @@ component(MyTag)(document.getElementById('root'))
 ### Compilation via Node
 
 ``` javascript
-import {compile} from 'riotjs@compiler'
+import {compile} from '@riotjs/compiler'
 
-const { code, map } = compile('<p>{hello}</p>')
+const { code, map } = compile('<p>{hello}</p>', {
+  //...options
+  file: 'my/path/to/my-component.riot',
+  // transform the `:host` css rules
+  scopedCss: true,
+  // expressions delimiters
+  brackets: ['{', '}'],
+  // keep HTML comments
+  comments: false
+})
 ```
 
 The compile function takes a string and returns an object containing the `code` and `map` keys.
@@ -121,10 +130,7 @@ riot some/folder --output path/to/dist
 
 ```
 
-The source files can contain only one custom element each!
-
 For more information, type: `riot --help`
-
 
 #### Watch mode
 
@@ -299,6 +305,47 @@ For the `css` and `javascript` preprocessors you can simply enable them directly
     }
   </script>
 </my-component>
+```
+
+### Pre-processors Caveats
+
+The Riot.js compiler generates sourcempas out of the code provided by the pre-processors. If your preprocessor will not provide any `map` output the compiler will not output proper sourcemaps.
+
+```js
+
+import { registerPreprocessor } from '@riotjs/compiler'
+import babel from '@babel/core'
+
+registerPreprocessor('javascript', 'babel', function(code, { options }) {
+  // the babel.taransform returns properly an object containing the keys {map, code}
+  return babel.transform(code, {
+    sourceMaps: true,
+    // motice that whitelines should be preserved
+    retainLines: true,
+    sourceFileName: options.file,
+    presets: [[
+      '@babel/env',
+      {
+        targets: {
+          edge: true
+        },
+        loose: true,
+        modules: false,
+        useBuiltIns: 'usage'
+      }
+    ]]
+  })
+})
+
+
+registerPreprocessor('javascript', 'my-js-preprocessor', function(code, { options }) {
+  // the Riot.js compiler will not be able to generate sourcemaps
+  return {
+    code: myPreprocessor(code),
+    map: null
+  }
+})
+
 ```
 
 ## Post-processors

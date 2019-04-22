@@ -83,7 +83,7 @@ component(MyTag)(document.getElementById('root'))
 ### Compilation via Node
 
 ``` javascript
-import {compile} from 'riotjs@compiler'
+import {compile} from '@riotjs/compiler'
 
 const { code, map } = compile('<p>{hello}</p>')
 ```
