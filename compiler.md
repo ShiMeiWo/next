@@ -317,10 +317,10 @@ import { registerPreprocessor } from '@riotjs/compiler'
 import babel from '@babel/core'
 
 registerPreprocessor('javascript', 'babel', function(code, { options }) {
-  // the babel.taransform returns properly an object containing the keys {map, code}
+  // the babel.transform returns properly an object containing the keys {map, code}
   return babel.transform(code, {
     sourceMaps: true,
-    // motice that whitelines should be preserved
+    // notice that whitelines should be preserved
     retainLines: true,
     sourceFileName: options.file,
     presets: [[
@@ -347,6 +347,8 @@ registerPreprocessor('javascript', 'my-js-preprocessor', function(code, { option
 })
 
 ```
+
+The javascript preprocessors should preserve the code whitelines of the original source code otherwise the resulting sourcemap will have a broken offset.
 
 ## Post-processors
 
