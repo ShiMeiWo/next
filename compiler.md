@@ -6,7 +6,7 @@ title: Compiler
 ## Introduction
 
 Custom tags need to be transformed to javascript before the browser can execute them.
-The riot compiler is designed to transpile riot tags into javascript modules.
+The riot compiler is designed to transform riot tags into javascript modules.
 A compiled riot tag will look like this:
 
 ```js
@@ -170,7 +170,7 @@ export default {
 }
 ```
 
-If you want to use custom preprocessors in your project you should install `@riotjs/cli` as `devDependency` runnint it via npm scripts as follows:
+If you want to use custom preprocessors in your project you should install `@riotjs/cli` as `devDependency` running it via npm scripts as follows:
 
 
 ```json
