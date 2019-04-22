@@ -157,6 +157,8 @@ The riot `riot.config.js` file:
 ```js
 export default {
   output: 'tags/dist',
+  // sourcemap type
+  sourcemap: 'inline',
   // files extension
   extension: 'foo'
 }
@@ -208,5 +210,114 @@ export default {
 }
 ```
 
+## Pre-processors
 
+As we have seen in the example above you can pre-process your components contents using your favorite programming language.
+
+The `@riotjs/compiler` gives you the possibility to register your preprocessors:
+
+```js
+import { registerPreprocessor } from '@riotjs/compiler'
+import pug from 'pug'
+import sass from 'node-sass'
+import ts from 'ts'
+
+registerPreprocessor('template', 'pug', function(code, { options }) {
+  const { file } = options
+  console.log('Preprocess the template', file)
+
+  return {
+    code: pug.render(code),
+    // no sourcemap here
+    map: null
+  }
+})
+
+registerPreprocessor('css', 'sass', function(code, { options }) {
+  const { file } = options
+
+  console.log('Compile the sass code in', file)
+
+  const css = sass.renderSync({
+    data: code
+  })
+
+  return {
+    code: css,
+    map: null
+  }
+})
+
+
+registerPreprocessor('javascript', 'ts', function(code, { options }) {
+  const { file } = options
+
+  const result = ts.transpileModule(code, {
+    fileName: file,
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext
+    }
+  })
+
+  return {
+    code: result.outputText,
+    map: null
+  }
+})
+```
+
+The Riot.js preprocessors can be only of three types `template`, `css`, `javascript`.
+To compile your components with a different template engine you will need to pass the `template` option to the compiler:
+
+```js
+import { compile } from '@riotjs/compiler'
+
+compile(source, {
+  template: 'pug'
+})
+```
+
+For the `css` and `javascript` preprocessors you can simply enable them directly in your components via `type="{preprocessor}"` attribute
+
+```html
+<my-component>
+  <p>{getMessage}</p>
+
+  <style type="scss">
+    import 'color/vars'
+
+    p {
+      color: $primary;
+    }
+  </style>
+
+  <script type="ts">
+    export default {
+      getMessage():string {
+        return 'hello world'
+      }
+    }
+  </script>
+</my-component>
+```
+
+## Post-processors
+
+Similar to the preprocessor the compiler output can be modified via `registerPostprocessor`.
+
+```js
+import { registerPostprocessor } from '@riotjs/compiler'
+import buble from 'buble'
+
+// your compiler output will pass from here
+registerPostprocessor(function(code, { options }) {
+  const { file } = options
+  console.log('your file path is:', file)
+
+  // notice that buble.transform returns {code, map}
+  return buble.transform(code)
+})
+```
+
+In this case we make sure that the output code will be converted to es2015 via `buble`.
 
