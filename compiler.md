@@ -164,7 +164,7 @@ export default {
 }
 ```
 
-If you want to use custom preprocessor in your project you should install `@riotjs/cli` as `devDependency` runnint it via npm scripts as follows:
+If you want to use custom preprocessors in your project you should install `@riotjs/cli` as `devDependency` runnint it via npm scripts as follows:
 
 
 ```json
@@ -212,7 +212,7 @@ export default {
 
 ## Pre-processors
 
-As we have seen in the above example you can pre-process your components contents using your favorite programming language.
+You can pre-process your components contents using your favorite programming language.
 
 The `@riotjs/compiler` gives you the possibility to register your preprocessors:
 
