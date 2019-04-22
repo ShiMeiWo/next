@@ -67,7 +67,7 @@ Pre-compilation on gives you following benefits:
 Tools like [`webpack`](https://webpack.js.org/) and [`rollup`](https://rollupjs.org/) are the perfect match to bundle your riot application tags.
 For such tools we provide riot official loaders to let import natively riot components into your source code:
   - [webpack](https://github.com/riot/webpack-loader)
-  - [rollup](https://github.com/riot/rollup-plugin-riot).
+  - [rollup](https://github.com/riot/rollup-plugin-riot)
   - [parcel](https://github.com/riot/parcel-plugin-riot)
   - [riotify](https://github.com/riot/riotify)
 
@@ -212,7 +212,7 @@ export default {
 
 ## Pre-processors
 
-As we have seen in the example above you can pre-process your components contents using your favorite programming language.
+As we have seen in the above example you can pre-process your components contents using your favorite programming language.
 
 The `@riotjs/compiler` gives you the possibility to register your preprocessors:
 
@@ -266,8 +266,8 @@ registerPreprocessor('javascript', 'ts', function(code, { options }) {
 })
 ```
 
-The Riot.js preprocessors can be only of three types `template`, `css`, `javascript`.
-To compile your components with a different template engine you will need to pass the `template` option to the compiler:
+The Riot.js preprocessors can be only of three types `template`, `css`, `javascript` (the first argument of the `registerPreprocessor` function).
+To compile your components with a different template engine you will need to specify the `template` option via compiler:
 
 ```js
 import { compile } from '@riotjs/compiler'
@@ -303,7 +303,7 @@ For the `css` and `javascript` preprocessors you can simply enable them directly
 
 ## Post-processors
 
-Similar to the preprocessor the compiler output can be modified via `registerPostprocessor`.
+Similar to the preprocessor the compiler output can be modified via `registerPostprocessor`
 
 ```js
 import { registerPostprocessor } from '@riotjs/compiler'
