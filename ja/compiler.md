@@ -34,7 +34,7 @@ For example:
 <script src="path/to/javascript/my-tag.riot" type="riot"></script>
 
 <!-- include riot.js and the compiler -->
-<script src="https://cdn.jsdelivr.net/npm/riot@{{ site.data.globals.version }}/riot+compiler.min.js"></script>
+<script src="https://unpkg.com/riot@{{ site.data.globals.version }}/riot+compiler.min.js"></script>
 
 <!-- compile and mount -->
 <script>

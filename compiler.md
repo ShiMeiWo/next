@@ -34,7 +34,7 @@ For example:
 <script src="path/to/javascript/my-tag.riot" type="riot"></script>
 
 <!-- include riot.js and the compiler -->
-<script src="https://cdn.jsdelivr.net/npm/riot@{{ site.data.globals.version }}/riot+compiler.min.js"></script>
+<script src="https://unpkg.com/riot@{{ site.data.globals.version }}/riot+compiler.min.js"></script>
 
 <!-- compile and mount -->
 <script>
@@ -92,6 +92,121 @@ The compile function takes a string and returns an object containing the `code` 
 You can handle the code generated however you like and use it into your build system.
 
 Remember that the riot compiler outputs javascript modules and you might want to transpile them in your bundle.
+
+
+### Compilation via Riot.js CLI
+
+You can precompile Riot.js files also via the [`riot`](https://github.com/riot/cli) executable, which can be installed with NPM as follows:
+
+``` sh
+npm install @riotjs/cli -g
+```
+
+#### Using
+
+Here is how `riot` command works:
+
+``` sh
+# compile a file to current folder
+riot some.riot
+
+# compile file to target folder
+riot some.riot --output some-folder
+
+# compile file to target path
+riot some.riot --output some-folder/some.js
+
+# compile all files from source folder to target folder
+riot some/folder --output path/to/dist
+
+```
+
+The source files can contain only one custom element each!
+
+For more information, type: `riot --help`
+
+
+#### Watch mode
+
+You can watch directories and automatically transform files when they are changed.
+
+``` sh
+# watch for
+riot -w src -o dist
+```
+
+
+#### Custom extension
+
+You're free to use any file extension for your tags (instead of default `.riot`):
+
+``` sh
+riot --extension html
+```
+
+#### ES6 Config file
+
+You can use a config file to store and configure easily all your `@riotjs/cli` options and create your custom parsers
+
+``` sh
+riot --config riot.config src
+```
+
+The riot `riot.config.js` file:
+
+```js
+export default {
+  output: 'tags/dist',
+  // files extension
+  extension: 'foo'
+}
+```
+
+If you want to use custom preprocessor in your project you should install `@riotjs/cli` as `devDependency` runnint it via npm scripts as follows:
+
+
+```json
+
+{
+  "scripts": {
+    "build": "npx riot -c riot.config src"
+  },
+  "devDependencies": {
+    "@riotjs/cli": "^4.0.0",
+    "@riotjs/compiler": "^4.0.0",
+    "pug": "^2.0.3"
+  }
+}
+```
+
+That's how your `riot.config.js` file might look like in case you want to use `pug` as components template engine
+
+```js
+import { registerPreprocessor } from '@riotjs/compiler'
+import { render } from 'pug'
+
+// register the pug preprocessor
+registerPreprocessor('template', 'pug', (code, options) => {
+  const { file } = options
+
+  return {
+    code: render(code, {
+      filename: file,
+      pretty: true,
+      doctype: 'html'
+    })
+  }
+})
+
+export default {
+  extension: 'pug',
+
+  // assign the pug preprocessor to the riot compiler options
+  riot: {
+    template: 'pug'
+  }
+}
+```
 
 
 
