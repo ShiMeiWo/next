@@ -1,6 +1,7 @@
 ---
-layout: detail
 title: Documentation
+layout: detail
+description: Step by step starting guide
 ---
 
 ## Basis

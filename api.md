@@ -1,7 +1,7 @@
 ---
 title: API
 layout: detail
-class: apidoc
+description: Framework API, methods and properties
 ---
 
 

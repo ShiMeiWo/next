@@ -9,3 +9,6 @@
 
 - path: /faq
   label: FAQ
+
+- path: /migration-guide
+  label: Migration Guide
