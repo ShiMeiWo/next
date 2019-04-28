@@ -10,7 +10,7 @@ description: Migration guide from Riot.js 2 and 3
 
 Riot.js 4 is a complete rewrite, I will provide a detailed explanation about it on Medium soon so please [let's stay in touch](https://medium.com/@gianluca.guarini){:target="_blank"}.
 
-Migrating older applications written in Riot.js 3 is not recommended because the legacy Riot.js versions will still get security patches and they are enough stable.
+Migrating older applications written in Riot.js 3 is not recommended because older Riot.js versions will still get security patches and they are stable enough.
 
 You can use this guide to learn how to write components for Riot.js 4 coming from Riot.js 3 and 2.
 
@@ -21,7 +21,7 @@ Less magic means more clarity and interoperability, Riot.js 4 components are des
 
 ### The script tag
 
-In the previous Riot.js versions you could just extend to your component instance via `this` keyword in your `<script>` tags. This syntax sugar was removed because the components public API can be clearer defined using standard javascript ES2018 syntax:
+In the previous Riot.js versions you could just extend to your component instance via `this` keyword in your `<script>` tags. This syntax sugar was removed in favor of a cleaner API relying on the standard javascript ES2018 syntax:
 
 **old**
 
@@ -56,7 +56,7 @@ In the previous Riot.js versions you could just extend to your component instanc
 </my-component>
 ```
 
-In this way your editor, and other compilers like `typescript` will not get confused bye your component javascript logic and can be used along the way without any special concerns.
+In this way your editor, and other compilers like `typescript` will not get confused by your components javascript logic and can be used along the way without any special concerns.
 
 It's worth to mention that this change was driven by the new [Riot.js philosophy]({{ '/'|prepend:site.baseurl }}#conclusion):
 
@@ -65,7 +65,7 @@ There should be one– and preferably only one –obvious way to do it.<br/>
 Although that way may not be obvious at first unless you’re Dutch...
 
 <aside class="note note--info">
-Notice how the use of the <code>&#x3C;script&#x3E;</code> tag becomes mandatory to split your components templates from their logic.
+Notice how the use of the <code>&#x3C;script&#x3E;</code> tag becomes mandatory to split your components templates from their javascript logic.
 </aside>
 
 
@@ -84,6 +84,7 @@ The template shortcuts were completely removed in favor of pure and more explici
 **new**
 
 ```js
+// riot-class-names-plugin.js
 /**
  * Convert object class constructs into strings
  * @param   {Object} classes - class list as object
@@ -140,6 +141,162 @@ Even better, you can use the `classNames` directly in your components logic keep
 </my-component>
 ```
 
-and don't forget to remember that:
+The same short cut was available for the `style` attribute but now in Riot.js 3 you will need to handle the `style` attributes by yourselves:
+
+**old**
+
+{% raw %}
+```html
+
+<my-component>
+  <p style={{ color: 'red', 'font-size': `${fontSize}px` }}>hello</p>
+</my-component>
+```
+{% endraw %}
+
+**new**
+```js
+// riot-style-attributes-plugin.js
+/**
+ * Convert object attributes constructs into strings
+ * @param   {Object} attributes - style attributes as object
+ * @returns {string} a string with all the attributes and their values
+ */
+function styleAttribute(attributes) {
+  return Object.entries(attributes).reduce((acc, item) => {
+    const [key, value] = item
+
+    return [...acc, `${key}: ${value}`]
+  }, []).join(';')
+}
+
+// install the styleAttribute plugin
+riot.install(function(component) {
+  // add the styleAttribute helper to all the riot components
+  component.styleAttribute = styleAttribute
+
+  return component
+})
+```
+
+```html
+<my-component>
+  <p style={
+    styleAttribute({
+      color: 'red',
+      'font-size': `${fontSize}px`
+    })
+  }>hello</p>
+</my-component>
+```
+
+Now your code and your helpers will be completely customizable without relying on the framework built in.
+This means that you will have more freedom and less bugs coming from your third party code...and don't forget to remember that:
 
 > ...Explicit is better than implicit...
+
+
+### Observable
+
+The Observable pattern was completely integrated into the previous Riot.js versions. This was an opinionated decision that might not work for all users. Riot.js 3 leaves you the decision regarding which programming pattern to use in your application and for this reason the observable helpers were completely removed from the source code in favor of a more generic approach.
+
+**old**
+
+```html
+<my-component>
+  <p>{message}</p>
+
+  this.on('mount', function() {
+    this.message = 'hello'
+    this.update()
+  })
+</my-component>
+```
+
+**new**
+
+```html
+<my-component>
+  <p>{message}</p>
+
+  <script>
+    export default {
+      onMounted() {
+        this.message = 'hello'
+        this.update()
+      }
+    }
+  </script>
+</my-component>
+```
+
+Please check also the new components [lifecycle events]({{ '/documentation/'|prepend:site.baseurl }}#lifecycle-callbacks).
+
+This change opens many new possibilities to manage your application state keeping the doors open to the nostalgic users that still prefer the observable lifecycle pattern.
+
+```js
+// riot-observable-plugin.js
+
+import observable from 'riot-observable'
+
+/**
+ * Trigger the old observable and the new event
+ * @param   {RiotComponent} component - riot component
+ * @param   {Function} callback - lifecycle callback
+ * @param   {string} eventName - observable event name
+ * @param   {...[*]} args - event arguments
+ * @returns {RiotComponent|undefined}
+ */
+function triggerEvent(component, callback, eventName, ...args) {
+  component.trigger(eventName, ...args)
+  return callback.apply(component, [...args])
+}
+
+riot.install(function(componentAPI) {
+  const {
+      onBeforeMount,
+      onMounted,
+      onBeforeUpdate,
+      onUpdated,
+      onBeforeUnmount,
+      onUnmounted
+  } = componentAPI
+
+  // make the riot component observable
+  const component = observable(componentAPI)
+  // remap the new event to the old ones
+  const eventsMap = {
+    onBeforeMount: ['before-mount', onBeforeMount],
+    onMounted: ['mount', onMounted],
+    onBeforeUpdate: ['before-update', onBeforeUpdate],
+    onUpdated: ['updated', onUpdated],
+    onBeforeUnmount: ['before-unmount', onBeforeUnmount],
+    onUnmounted: ['unmount', onUnmounted]
+  }
+
+  Object.entries(eventsMap).forEach(([eventName, value]) => {
+    const [oldObservableEvent, newCallback] = value
+    component[eventName] = (...args) => triggerEvent(
+      component, newCallback, oldObservableEvent, ...args
+    )
+  })
+
+  return component
+})
+```
+
+```html
+<my-component>
+  <p>{message}</p>
+
+  <script>
+    export default {
+      onMounted() {
+        this.on('update', () => {
+          console.log('I got updated!')
+        })
+      }
+    }
+  </script>
+</my-component>
+```
