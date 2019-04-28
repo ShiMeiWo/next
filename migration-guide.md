@@ -14,7 +14,7 @@ Migrating older applications written in Riot.js 3 is not recommended because old
 
 You can use this guide to learn how to write components for Riot.js 4 coming from Riot.js 3 and 2.
 
-## Component syntax
+## Component Syntax and API
 
 The components syntax was updated to match the modern javascript standards avoiding any possible ambiguity.
 Less magic means more clarity and interoperability, Riot.js 4 components are designed to be completely future proof!
@@ -300,3 +300,131 @@ riot.install(function(componentAPI) {
   </script>
 </my-component>
 ```
+
+### Opts vs props and state
+
+The previous Riot.js versions provided the `opts` key to each component. This key was renamed `props` and it becomes immutable: it's a read only property frozen via `Object.freeze`.
+The `props` object can be only updated outside of the component that reads from it, while the new `state` object is updated via [`update` calls]({{ '/api/'|prepend:site.baseurl }}#state-handling).
+
+**old**
+
+```html
+<my-component>
+  <p>{opts.message}</p>
+</my-component>
+```
+
+**new**
+```html
+<my-component>
+  <p>{props.message}</p>
+</my-component>
+```
+
+### Refs attributes
+
+The `ref` attributes were replaced by the `$` and `$$` [component helpers]({{ '/api/'|prepend:site.baseurl }}#helpers) preferring a functional approach over mutable properties.
+
+**old**
+
+```html
+<my-component>
+  <p ref='paragraph'>{message}</p>
+
+  this.on('mount', function() {
+    this.refs.paragraph.innerHTML = '<b>hello</b>'
+  })
+</my-component>
+```
+
+**new**
+```html
+<my-component>
+  <p>{message}</p>
+
+  <script>
+    export default {
+      onMounted() {
+        const paragraph = $('p')
+
+        paragraph.innerHTML = '<b>hello</b>'
+      }
+    }
+  </script>
+</my-component>
+```
+
+<aside class="note note--warning">:warning:
+The new helpers will never return the children component instances but only DOM nodes
+</aside>
+
+### Parent and tags keys
+
+The `parent` and `tags` keys were heavily abused by Riot.js users. They were the source of many side effects and clear bad practice. For this reason the children/parent components created via Riot.js 4 never expose their internal API, **components communicate only via props** and don't interact directly with the external world.
+
+**old**
+```html
+<my-component>
+  <my-child ref='child'/>
+
+  this.on('mount', function() {
+    this.refs.child.update({ message: 'hello' })
+  })
+</my-component>
+```
+
+**new**
+```html
+<my-component>
+  <my-child message={childMessage}/>
+
+  <script>
+    export default {
+      onMounted() {
+        this.childMessage = 'hello'
+        this.update()
+      }
+    }
+  </script>
+</my-component>
+```
+
+You can of course write your own riot plugin to add the `ref` behaviour but it's highly not recommended:
+
+```js
+// riot-ref-plugin.js
+riot.install(function(component) {
+  const { onBeforeMount } = component
+
+  component.onBeforeMount = (props, state) => {
+    if (props.ref) {
+      props.ref(component)
+    }
+
+    onBeforeMount.apply(component, [props, state])
+  }
+
+  return component
+})
+```
+
+```html
+<my-component>
+  <my-child ref={onChildRef}/>
+
+  <script>
+    export default {
+      onChildRef(child) {
+        this.child = child
+      },
+      onMounted() {
+        this.child.update()
+      }
+    }
+  </script>
+</my-component>
+```
+
+## CLI
+
+## Compiler
