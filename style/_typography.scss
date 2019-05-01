@@ -132,6 +132,10 @@ a {
   &:hover, &:focus, &:active {
     color: darken($primary, 10%);
     text-decoration: underline;
+
+    @media (prefers-color-scheme: dark) {
+      color: lighten($primary, 15%);
+    }
   }
 }
 
