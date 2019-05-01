@@ -134,7 +134,7 @@ a {
     text-decoration: underline;
 
     @media (prefers-color-scheme: dark) {
-      color: lighten($primary, 15%);
+      color: lighten($primary, 5%);
     }
   }
 }
