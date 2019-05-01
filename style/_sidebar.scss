@@ -1,5 +1,13 @@
 .sidebar {
   padding: 0 1.6rem;
+  background: $white;
+  border-right: 1px solid $paper-white;
+
+
+  @media (prefers-color-scheme: dark) {
+    background: $carbon-black;
+    border-right: 1px solid lighten($carbon-black, 15%);
+  }
 
   @include mq($from: 'mobile') {
     position: fixed;

@@ -149,7 +149,7 @@ li code, p code {
   border-radius: 3px;
 
   @media (prefers-color-scheme: dark) {
-    color: lighten(#058, 25%);
+    color: lighten($carbon-black, 75%);
     background-color: lighten($carbon-black, 4%);
   }
 }
