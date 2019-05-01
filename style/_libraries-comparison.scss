@@ -10,6 +10,10 @@
 
     &::-webkit-progress-bar {
       background: $paper-white;
+
+      @media (prefers-color-scheme: dark) {
+        background: lighten($carbon-black, 15%);
+      }
     }
   }
 
@@ -19,6 +23,11 @@
     border: none;
     margin-top: 0.2rem;
     color: $primary;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: lighten($carbon-black, 15%);
+    }
+
 
     &[value] {
       -webkit-appearance: none;

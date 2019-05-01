@@ -66,6 +66,10 @@
         padding: 0.2rem 0;
         color: $dark-grey;
 
+        @media (prefers-color-scheme: dark) {
+          color: lighten($carbon-black, 75%);
+        }
+
         &:focus, &:active, &:hover, &.active {
           color: $primary;
           text-decoration: underline;

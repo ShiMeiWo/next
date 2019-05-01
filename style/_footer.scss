@@ -2,6 +2,10 @@
   margin: 4rem 0 0;
   border-top: 0.1rem solid $paper-white;
 
+  @media (prefers-color-scheme: dark) {
+    border-top-color: lighten($carbon-black, 15%);
+  }
+
   @include mq($from: 'mobile') {
     padding: 1.2rem 0 1.2rem;
   }

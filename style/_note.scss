@@ -13,11 +13,21 @@
     border: 0.02rem solid $yellow;
     background: lighten($yellow, 45%);
     color: darken($yellow, 25%);
+
+    @media (prefers-color-scheme: dark) {
+      background: darken($yellow, 50%);
+      color: darken($yellow, 5%);
+    }
   }
 
   &.note--info {
     border: 0.02rem solid lighten($blue, 20%);
     background: lighten($blue, 48%);
     color: darken($blue, 15%);
+
+     @media (prefers-color-scheme: dark) {
+      background: darken($blue, 50%);
+      color: darken($blue, 10%);
+    }
   }
 }

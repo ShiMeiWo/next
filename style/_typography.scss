@@ -7,6 +7,11 @@ body {
   font-family: $font-family;
   color: $dark-grey;
   line-height: 1.4;
+
+  @media (prefers-color-scheme: dark) {
+    background: $carbon-black;
+    color: $white;
+  }
 }
 
 h1 {
@@ -79,7 +84,7 @@ h1, h2, h3, h4, h5 {
   &:target:before {
     content: "";
     display: block;
-    padding-top: 7.2rem;
+    padding-top: 11rem;
   }
 
   a:empty {
@@ -132,7 +137,7 @@ a {
 
 code {
   font-family: Menlo, Monaco, "Courier New", monospace;
-  font-size: 70%;
+  font-size: 80%;
 }
 
 li code, p code {
@@ -142,6 +147,11 @@ li code, p code {
   color: #058;
   background-color: $paper-white;
   border-radius: 3px;
+
+  @media (prefers-color-scheme: dark) {
+    color: lighten(#058, 25%);
+    background-color: lighten($carbon-black, 4%);
+  }
 }
 
 blockquote {
@@ -150,13 +160,18 @@ blockquote {
   font-style: italic;
   background: lighten($paper-white, 3%);
   border-left: 0.6rem solid $paper-white;
-  margin: 1.6rem 1rem 3.2rem;
+  margin: 1.6rem 0 3.2rem;
   padding: 3.2rem 4.8rem;
   font-size: 1.8rem;
   line-height: 1.6;
   quotes: "\201C""\201D""\2018""\2019";
   text-indent: -4rem;
   hyphens: auto;
+
+  @media (prefers-color-scheme: dark) {
+    border-left-color: lighten($carbon-black, 15%);
+    background-color: lighten($carbon-black, 4%);
+  }
 
 
   &::before,
