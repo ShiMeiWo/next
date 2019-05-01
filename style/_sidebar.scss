@@ -6,7 +6,7 @@
 
   @media (prefers-color-scheme: dark) {
     background: $carbon-black;
-    border-right: 1px solid lighten($carbon-black, 15%);
+    border-right: 1px solid $light-carbon-grey;
   }
 
   @include mq($from: 'mobile') {

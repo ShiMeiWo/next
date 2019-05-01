@@ -3,7 +3,7 @@
   border-top: 0.1rem solid $paper-white;
 
   @media (prefers-color-scheme: dark) {
-    border-top-color: lighten($carbon-black, 15%);
+    border-top-color: $light-carbon-grey;
   }
 
   @include mq($from: 'mobile') {

@@ -169,7 +169,7 @@ blockquote {
   hyphens: auto;
 
   @media (prefers-color-scheme: dark) {
-    border-left-color: lighten($carbon-black, 15%);
+    border-left-color: $light-carbon-grey;
     background-color: lighten($carbon-black, 4%);
   }
 

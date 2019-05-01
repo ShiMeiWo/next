@@ -12,7 +12,7 @@
       background: $paper-white;
 
       @media (prefers-color-scheme: dark) {
-        background: lighten($carbon-black, 15%);
+        background: $light-carbon-grey;
       }
     }
   }
@@ -25,7 +25,7 @@
     color: $primary;
 
     @media (prefers-color-scheme: dark) {
-      background-color: lighten($carbon-black, 15%);
+      background-color: $light-carbon-grey;
     }
 
 
