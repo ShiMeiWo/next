@@ -70,7 +70,7 @@ riot.unmount('user')
 
 `riot.component(component: RiotComponentShell): function`
 
-1. `コンポーネント` - [シェルオブジェクトのコンポーネント](#コンポーネントシェルインターフェース)
+1. `component` - [シェルオブジェクトのコンポーネント](#コンポーネントシェルインターフェース)
 
 <strong>@returns: </strong>[コンポーネントオブジェクト](#component-object) 生成のための関数
 
@@ -91,18 +91,18 @@ const app = createApp(document.getElementById('root'), {
 
 `riot.install(plugin: function): Set`
 
-1. `plugin` - function receiving [a component objects](#component-object) for any component created
+1. `plugin` - 生成された任意のコンポーネントの [コンポーネントオブジェクト](#コンポーネントオブジェクト) を受け取る関数
 
-<strong>@returns: </strong> a javascript `Set` containing all the plugin functions installed
+<strong>@returns: </strong> インストールされた全てのプラグイン関数を含む javascript `Set`
 
-Once installed a plugin function will be called for any Riot.js component created
+一度インストールされたプラグイン関数 は生成された任意の Riot.js コンポーネントに対しコールされます
 
 ```js
 import { install } from 'riot'
 
 let id = 0
 
-// this plugin adds the uid attribute on any riot component created
+// このプラグインは生成された任意の riot コンポーネントに uid 属性を追加します
 install(function(component) {
   component.uid = id++
 
