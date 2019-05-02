@@ -70,11 +70,11 @@ riot.unmount('user')
 
 `riot.component(component: RiotComponentShell): function`
 
-1. `component` - [a component shell object](#component-shell-interface)
+1. `コンポーネント` - [シェルオブジェクトのコンポーネント](#コンポーネントシェルインターフェース)
 
-<strong>@returns: </strong>a function to create [component objects](#component-object)
+<strong>@returns: </strong>[コンポーネントオブジェクト](#component-object) 生成のための関数
 
-The `riot.component` method can be used to create and mount component without registering them globally:
+`riot.component` メソッドを使用すると、コンポーネントをグローバルに登録せずにコンポーネントを生成、およびマウントできます:
 
 ```js
 import * from riot from 'riot'
