@@ -17,7 +17,7 @@ class: apidoc
 
 3. `componentName` は、マウントするノードが riot によって自動マウントされない場合のオプショナルなコンポーネントの名前です。
 
-<strong>@returns: </strong>マウントされた[コンポーネントオブジェクト](#コンポーネントオブジェクト)の配列
+<strong>@returns: </strong>マウントされた [コンポーネントオブジェクト](#コンポーネントオブジェクト) の配列
 
 
 例:
@@ -57,14 +57,14 @@ riot.mount('my-component', () => ({
 
 `riot.unmount(selector: string): [HTMLElement]`
 
-1. `selector` selects elements from the page and unmounts them if they were mounted before.
+1. `selector` はページから要素を選択肢し、それらが既にマウントされていた場合はアンマウントします。
 
 ```js
-// Select all the <user> tags and unmount them
+// 全ての <user> タグを選択し、それらをアンマウントする
 riot.unmount('user')
 ```
 
-<strong>@returns: </strong>an array of the mounted [component objects](#component-object)
+<strong>@returns: </strong>マウントされた [コンポーネントオブジェクト](#コンポーネントオブジェクト) の配列
 
 ### riot.component
 
