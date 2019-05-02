@@ -70,7 +70,7 @@ riot.unmount('user')
 
 `riot.component(component: RiotComponentShell): function`
 
-1. `component` - [シェルオブジェクトのコンポーネント](#コンポーネントシェルインターフェース)
+1. `component` - [コンポーネントシェルオブジェクト](#コンポーネントシェルインターフェース)
 
 <strong>@returns: </strong>[コンポーネントオブジェクト](#component-object) 生成のための関数
 
@@ -134,10 +134,10 @@ uninstall(uid)
 
 `riot.register(name: string, component: RiotComponentShell): Map`
 
-1. `name` - the component name
-2. `component` - [a component shell object](#component-shell-interface)
+1. `name` - コンポーネント名
+2. `component` - [コンポーネントシェルオブジェクト](#component-shell-interface)
 
-<strong>@returns: </strong> a javascript `Map` containing all registered components factory functions
+<strong>@returns: </strong> 全ての登録済みコンポーネントのファクトリ関数を含む javascript `Map`
 
 ```js
 import { register, mount } from 'riot'
@@ -146,8 +146,8 @@ import MyComponent from './my-component.riot'
 // my-component をグローバルコンポーネントとして登録
 register('my-component', MyComponent)
 
-// find all the DOM nodes called `<my-component>` and
-// mount them with the component previously registered
+// `<my-component>` を呼ばれるすべての DOM ノードを検索し
+// 既に登録したコンポーネントと一緒にマウントします
 mount('my-component')
 ```
 
@@ -157,7 +157,7 @@ mount('my-component')
 
 1. `name` - the component name
 
-<strong>@returns: </strong> 登録解除されていない残りのコンポーネントから生成された関数を含む javascript の `Map`
+<strong>@returns: </strong> アンマウント されていない残りのコンポーネントから生成された関数を含む javascript の `Map`
 
 既にコンパイラか `riot.register()` を介して生成されたタグの登録を解除します。
 このメソッドは、例えばアプリケーションをテストする必要があり、かつ同じ名前を使用して複数のタグを生成したい時などに有効かもしれません。
