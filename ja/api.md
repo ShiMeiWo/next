@@ -5,38 +5,38 @@ class: apidoc
 ---
 
 
-## Core API
+## コア API
 
 ### riot.mount
 
 `riot.mount(selector: string, props?: object, componentName?: string): [RiotComponent]`
 
-1. `selector` selects elements from the page and mounts them with a custom components. The selected elements' name must match the custom tag name. DOM nodes having the `is` attribute can also be automounted
+1. `selector` はページから要素を選択し、それらをカスタムコンポーネントとともにマウントします。選択したエレメントの名前は、カスタムタグの名前と一致する必要があります。is属性を持つDOMノードも自動マウントできます。
 
-2. `props` optional object is passed for the component to consume. This can be anything, ranging from a simple object to a full application API. Or it can be a Flux- store. Really depends on how you want to structure your client-side applications. *Also note* that attributes you set on your tags will take precedence over ones specified with same names via `props` argument.
+2. 消費するために `props` というオプショナルなオブジェクトがコンポーネントに渡されます。これには、単純なオブジェクトから完全なアプリケーション API まで、あらゆるものを使用できます。もしくは Flux ストアの場合もあります。実際には、クライアント側のアプリケーションをどのように構成するかによって異なります。*注意* タグに設定した属性は、`props` 引数で同じ名前を指定した属性よりも優先されます。
 
-3. `componentName` optional component name in case the node to mount can't be automounted by riot
+3. `componentName` は、マウントするノードが riot によって自動マウントされない場合のオプショナルなコンポーネントの名前です。
 
-<strong>@returns: </strong>an array of the mounted [component objects](#component-object)
+<strong>@returns: </strong>マウントされた[コンポーネントオブジェクト](#コンポーネントオブジェクト)の配列
 
 
-Examples:
+例:
 
 ``` js
-// selects and mounts all <pricing> tags on the page
+// 選択し、そしてページ上の全ての <pricing> タグをマウント
 const components = riot.mount('pricing')
 
-// mount all tags with a class name .customer
+// クラス名が .customer である全てのタグをマウント
 const components = riot.mount('.customer')
 
-// mount <account> tag and pass an API object as options
+// <account> タグをマウントし、オプションとして API オブジェクトを渡す
 const components = riot.mount('account', api)
 
-// mount <div id="root"> tag passing the API object using the previously registered `app` component
+// 既に登録された `app` コンポーネントを使用して <div id="root"> タグに API オブジェクトを渡す
 const components = riot.mount('#root', api, 'app')
 ```
 
-Note: users of [In-browser compilation](/compiler/#in-browser-compilation) will need to wait the components compilation before calling the `riot.mount` method.
+メモ: [インブラウザコンパイル](/compiler/#インブラウザコンパイル) を利用しているユーザーは、`riot.mount` メソッドをコールする前にコンポーネントのコンパイルを待つ必要があるでしょう。
 
 ```javascript
 (async function main() {
@@ -46,7 +46,7 @@ Note: users of [In-browser compilation](/compiler/#in-browser-compilation) will 
 }())
 ```
 
-The `props` argument can be also a function in order to avoid sharing the same object across several tag instances [riot/2613](https://github.com/riot/riot/issues/2613)
+`props` 引数には、複数のタグインスタンス間で同じオブジェクトを共有することを避けるために関数を指定することも可能です。[riot/2613](https://github.com/riot/riot/issues/2613)
 
 ``` js
 riot.mount('my-component', () => ({
@@ -143,7 +143,7 @@ uninstall(uid)
 import { register, mount } from 'riot'
 import MyComponent from './my-component.riot'
 
-// register the my-component as global component
+// my-component をグローバルコンポーネントとして登録
 register('my-component', MyComponent)
 
 // find all the DOM nodes called `<my-component>` and
@@ -157,28 +157,27 @@ mount('my-component')
 
 1. `name` - the component name
 
-<strong>@returns: </strong> a javascript `Map` containing the remaining registered components factory functions
+<strong>@returns: </strong> 登録解除されていない残りのコンポーネントから生成された関数を含む javascript の `Map`
 
-Unregistering a tag previously created via compiler or via `riot.register()`
-This method could be handy in case you need to test your app and you want to create multiple
-tags using the same name for example
+既にコンパイラか `riot.register()` を介して生成されたタグの登録を解除します。
+このメソッドは、例えばアプリケーションをテストする必要があり、かつ同じ名前を使用して複数のタグを生成したい時などに有効かもしれません。
 
 ```js
 import { register, unregister } from 'riot'
 import TestComponent from './test-component.riot'
 import TestComponent2 from './test-component2.riot'
 
-// create a test component
+// test コンポーネントを生成
 register('test-component', TestComponent)
 
-// mount it
+// マウント
 const [component] = mount(document.createElement('div'), 'test-component')
 expect(component.root.querySelector('p')).to.be.ok
 
-// unregister the tag
+// tag を登録解除
 unregister('test-component')
 
-// recreate the same component using a different template
+// 異なるテンプレートを利用して同じコンポーネントを再生性
 register('test-component', TestComponent2)
 ```
 
@@ -186,9 +185,9 @@ register('test-component', TestComponent2)
 
 `riot.version(): string`
 
-<strong>@returns: </strong> the current riot version in use as string
+<strong>@returns: </strong> 現在使用しているの riot のバージョンを文字列として返す
 
-## Component object
+## コンポーネントオブジェクト
 
 Each Riot.js component is created as lightweight object. The object that you export via `export default` will have the following properties:
 
