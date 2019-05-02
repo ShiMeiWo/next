@@ -94,7 +94,7 @@ Riot custom components are the building blocks for user interfaces. They make th
 
   <script>
     export default {
-      onBeforeMount(state, props) {
+      onBeforeMount(props, state) {
         // initial state
         this.state = {
           items: props.items,
