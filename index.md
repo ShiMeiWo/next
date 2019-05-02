@@ -118,7 +118,7 @@ Minimalism sets Riot.js apart from others:
 One of the design goals was to introduce a powerful tag syntax with as little boilerplate as possible:
 
 - No extra brain load for attributes like `className`, `htmlFor`...
-- Shortcut spread operator for multiple attributes: `<p ...{ attributes }></p>`
+- Shortcut spread operator for multiple attributes: `<p { ...attributes }></p>`
 - Expressions Interpolation: `Add #{ items.length + 1 }` or `class="item { activeClass }"`
 - `export default` statement to define the tags public interfaces
 - No side effects due to asynchronous rendering or `Proxy` objects

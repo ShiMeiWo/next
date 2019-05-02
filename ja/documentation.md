@@ -530,7 +530,7 @@ You can also use an object spread expression to define multiple attributes. For 
 
 ```html
 <my-component>
-  <p ...{ attributes }></p>
+  <p { ...attributes }></p>
   <script>
     export default {
       attributes: {
@@ -822,7 +822,7 @@ The element with the `each` attribute will be repeated for all items in the arra
 Custom components can also be looped. For example:
 
 ```html
-<todo-item each="{ item in items }" ...{ item }></todo-item>
+<todo-item each="{ item in items }" { ...item }></todo-item>
 ```
 
 The currently looped item properties can directly be passed to the looped tag.
