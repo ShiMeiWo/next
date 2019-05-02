@@ -114,11 +114,11 @@ install(function(component) {
 
 `riot.uninstall(plugin: function): Set`
 
-1. `plugin` - function plugin already installed before
+1. `plugin` - 既にインストールされた関数プラグイン
 
-<strong>@returns: </strong> a javascript `Set` containing all the plugin remaining functions installed
+<strong>@returns: </strong> インストールされた残りのプラグイン関数を含む javascript `Set`
 
-A plugin can be installe and uninstalled:
+プラグインはインストールおよびアンインストールできます:
 
 ```js
 import { install, uninstall } from 'riot'
@@ -126,7 +126,7 @@ import uid from './riot-uid.js'
 
 install(uid)
 
-// uninstall the plugin if it's not needed anymore
+// プラグインがもう不要となった場合アンインストールする
 uninstall(uid)
 ```
 
