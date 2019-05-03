@@ -189,31 +189,31 @@ register('test-component', TestComponent2)
 
 ## コンポーネントオブジェクト
 
-Each Riot.js component is created as lightweight object. The object that you export via `export default` will have the following properties:
+各 Riot.js コンポーネントは軽量なオブジェクトとして生成されます。`export default` を使用してエクスポートするオブジェクトには以下のプロパティがあります:
 
 - Attributes
-  - `props` - the props received as object
-  - `state` - the current component state object
-  - `root` - root DOM node
-- [Create/Destroy](#createdestroy)
-  - `mount` - initialize the component
-  - `unmount` - destroy the component and remove it from the DOM
-- [State handling](#state-handling) methods
-  - `update` - method to update the component state
-  - `shouldUpdate` - method to pause the component rendering
-- [Lifecycle callbacks](#lifecycle)
-  - `onBeforeMount` - called before the component will be mounted
-  - `onMounted` - called after the component has rendered
-  - `onBeforeUpdate` - called before the component will be updated
-  - `onUpdated` - called after the component has been updated
-  - `onBeforeUnmount` - called before the component will be removed
-  - `onUnmounted` - called once the component has been removed
-- [Helpers](#helpers)
-  - `$` - method similar to `document.querySelector`
-  - `$$` - method similar to `document.querySelectorAll`
+  - `props` - オブジェクトとして受けとる props
+  - `state` - 現在のステートオブジェクト
+  - `root` - ルート DOM ノード
+- [生成と破壊](#生成と破壊)
+  - `mount` - コンポーネントの初期化
+  - `unmount` - DOM から コンポーネントを壊し、取り除く
+- [ステートハンドリング](#ステートハンドリング) メソッド
+  - `update` - コンポーネントのステートを更新するメソッド
+  - `shouldUpdate` - コンポーネントレンダリングを一時停止するメソッド
+- [ライフサイクルコールバック](#ライフサイクル)
+  - `onBeforeMount` - コンポーネントがマウントされる前にコールされる
+  - `onMounted` - コンポーネントのレンダリングが完了した後にコールされる
+  - `onBeforeUpdate` - コンポーネントの更新前にコールされる
+  - `onUpdated` - コンポーネントの更新が完了した後にコールされる
+  - `onBeforeUnmount` - コンポーネントが削除される前にコールされる
+  - `onUnmounted` - コンポーネントの削除が完了した後にコールされる
+- [ヘルパー](#ヘルパー)
+  - `$` - `document.querySelector` に似たメソッド
+  - `$$` - `document.querySelectorAll` に似たメソッド
 
 
-### Component Interface
+### コンポーネントインターフェース
 
 If you familiar with Typescript here you can read how a Riot.js component interface looks like:
 
@@ -314,7 +314,7 @@ window.someGlobalVariable = 'Hello!'
 <aside class="note note--warning">:warning: beware that the use of global variables in your components might compromise their server side rendering and it's highly not recommended.</aside>
 
 
-### Create/Destroy
+### 生成と破壊
 
 #### component.mount
 
@@ -344,7 +344,7 @@ myComponent.unmount(true)
 ```
 
 
-### State handling
+### ステートハンドリング
 
 #### component.state
 
@@ -546,7 +546,7 @@ The `shouldUpdate` method will always receive 2 arguments: the first one contain
 
 
 
-###  Slots
+###  スロット
 
 The `<slot>` tag is a special Riot.js core feature that allows you to inject and compile the content of any custom component inside its template in runtime.
 For example using the following riot tag `my-post`
@@ -643,7 +643,7 @@ once mounted it will be rendered in this way:
 </my-other-post>
 ```
 
-### Lifecycle
+### ライフサイクル
 
 Each component object can rely on the following callbacks to handle its internal state:
 
@@ -692,7 +692,7 @@ All the lifecycle methods will receive 2 arguments `props` and `state`, they are
 </my-component>
 ```
 
-### Helpers
+### ヘルパー
 
 Any Riot.js component provides two helpers to query DOM nodes contained in its rendered template.
 
@@ -725,7 +725,7 @@ You can use the component helpers for doing simple DOM queries:
 </my-component>
 ```
 
-### Manual construction
+### 手動でのタグ構築
 
 Riot.js components are meant to be compiled to javascript via [@riotjs/compiler](/compiler). However you can build them manually with any rendering engine you like.
 
