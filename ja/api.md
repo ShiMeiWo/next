@@ -215,12 +215,12 @@ register('test-component', TestComponent2)
 
 ### コンポーネントインターフェース
 
-If you familiar with Typescript here you can read how a Riot.js component interface looks like:
+TypeScript に詳しい人は、ここに書かれているように Riot.js コンポーネントインタフェースがどのように見えるを読むことができます:
 
 ```ts
-// This interface is only exposed and any Riot component will receive the following properties
+// このインターフェースはただ後悔されているのみで、どんな Riot コンポーネントも以下のプロパティを受け取ります
 interface RiotCoreComponent {
-  // automatically generated on any component instance
+  // 任意のコンポーネントインスタンスで自動的に生成
   props: object;
   root: HTMLElement;
   mount(
@@ -234,23 +234,23 @@ interface RiotCoreComponent {
   ): RiotComponent;
   unmount(keepRootElement: boolean): RiotComponent;
 
-  // Helpers
+  // ヘルパー
   $(selector: string): HTMLElement;
   $$(selector: string): [HTMLElement];
 }
 
-// All the RiotComponent Public interface properties are optional
+// パブリックな RiotComponent インターフェースのプロパティはすべてオプショナルです
 interface RiotComponent extends RiotCoreComponent {
-  // optional on the component object
+  // コンポーネントオブジェクトでオプショナル
   state?: object;
 
-  // optional alias to map the children component names
+  // 子コンポーネントの名前をマップするオプションの別名
   components?: object;
 
-  // state handling methods
+  // ステートハンドリングメソッド
   shouldUpdate?(newProps:object, currentProps:object): boolean;
 
-  // lifecycle methods
+  // ライフサイクルメソッド
   onBeforeMount?(currentProps:object, currentState:object): void;
   onMounted?(currentProps:object, currentState:object): void;
   onBeforeUpdate?(currentProps:object, currentState:object): void;
@@ -260,7 +260,7 @@ interface RiotComponent extends RiotCoreComponent {
 }
 ```
 
-You can use any of the component properties in both the HTML and javascript code. For example:
+HTML と JavaScript コードの両方で任意のコンポーネントプロパティを使用できます。例:
 
 
 ``` html
@@ -277,7 +277,7 @@ You can use any of the component properties in both the HTML and javascript code
 </my-component>
 ```
 
-You can freely set any property to the component scope and it will be available in the HTML expressions. For example:
+コンポーネントスコープには任意のプロパティを自由に設定でき、HTML に式で使用できます。例:
 
 ``` html
 <my-component>
@@ -293,13 +293,13 @@ You can freely set any property to the component scope and it will be available 
 </my-component>
 ```
 
-Note: if you have some globals, you can also use these references in both the HTML and javascript code:
+メモ: いくつかのグローバル変数がある場合、HTML と JavaScript コードの両方でこれらの参照を使用することもできます:
 
 ```js
 window.someGlobalVariable = 'Hello!'
 ```
 
-``` html
+```html
 <my-component>
   <h3>{ window.someGlobalVariable }</h3>
 
@@ -311,7 +311,7 @@ window.someGlobalVariable = 'Hello!'
 </my-component>
 ```
 
-<aside class="note note--warning">:warning: beware that the use of global variables in your components might compromise their server side rendering and it's highly not recommended.</aside>
+<aside class="note note--warning">:warning: コンポーネントでグローバル変数を使用すると、おそらくサーバサイドレンダリングが損なわれる可能性があるため注意してください。そして、推奨しません。</aside>
 
 
 ### 生成と破壊
