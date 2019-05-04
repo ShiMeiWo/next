@@ -320,24 +320,24 @@ window.someGlobalVariable = 'Hello!'
 
 `component.mount(element: HTMLElement, initialState?: object, parentScope?: object): RiotComponent;`
 
-Any component object will be mounted on a DOM node in order to rendered its template becoming interactive.
+テンプレートをインタラクティブにレンダリングするために、任意のコンポーネントオブジェクトが DOM ノードにマウントされます。
 
-You will likely never call the `component.mount` method by yourself, you will use instead the [riot.mount](#riotmount) or [riot.component](#riotcomponent) instead.
+`component.mount` メソッドを自分で呼び出すことはまずありませんが、代わりに [riot.mount](#riotmount) または [riot.component](#riotcomponent) を使用します。
 
 #### component.unmount
 
 `component.mount(keepRoot?: boolean): RiotComponent`
 
-Detaches the custom component and its children from the page.
-If you want to unmount a tag without removing the root node you need to pass `true` to the unmount method
+カスタムコンポーネントとその子をページから切り離します。
+ルートノードを削除せずにタグをアンマウントしたい場合は、unmountメソッドに `true` を渡す必要があります。
 
-Unmount the tag and remove it template from the DOM:
+タグをアンマウントし、DOM からテンプレートを削除します:
 
 ``` js
 myComponent.unmount()
 ```
 
-Unmount the component keeping the root node into the DOM:
+ルートノードを DOM に保持したままコンポーネントをアンマウントします:
 
 ``` js
 myComponent.unmount(true)
