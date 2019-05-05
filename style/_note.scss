@@ -14,7 +14,7 @@
     background: lighten($yellow, 45%);
     color: darken($yellow, 25%);
 
-    @media (prefers-color-scheme: dark) {
+    @include at-root('body.dark') {
       background: darken($yellow, 50%);
       color: darken($yellow, 5%);
     }
@@ -25,7 +25,7 @@
     background: lighten($blue, 48%);
     color: darken($blue, 15%);
 
-     @media (prefers-color-scheme: dark) {
+     @include at-root('body.dark') {
       background: darken($blue, 50%);
       color: darken($blue, 10%);
     }

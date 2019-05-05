@@ -10,7 +10,7 @@
   z-index: 1;
   border-bottom: 1px solid $paper-white;
 
-  @media (prefers-color-scheme: dark) {
+  @include at-root('body.dark') {
     background: $carbon-black;
     border-bottom: 1px solid $light-carbon-grey;
   }
@@ -28,7 +28,7 @@
     -webkit-appearance: textfield;
     background: lighten($carbon-black, 90%);
 
-    @media (prefers-color-scheme: dark) {
+    @include at-root('body.dark') {
       color: $white;
       background: lighten($carbon-black, 4%);
     }

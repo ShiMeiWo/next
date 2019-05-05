@@ -358,7 +358,7 @@ The `ref` attributes were replaced by the `$` and `$$` [component helpers]({{ '/
 The new helpers will never return the children component instances but only DOM nodes
 </aside>
 
-### Parent and tags keys
+### Parent and children
 
 The `parent` and `tags` keys were heavily abused by Riot.js users. They were the source of many side effects and clear bad practice. For this reason the children/parent components created via Riot.js 4 never expose their internal API, **components communicate only via props** and don't interact directly with the external world.
 
@@ -424,6 +424,36 @@ riot.install(function(component) {
   </script>
 </my-component>
 ```
+
+#### Custom events dispatching
+
+Listening custom events dispatched in child components can be done simply via properties:
+
+```html
+<my-component>
+  <child on-loaded={onChildLoaded}></child>
+
+  <script>
+    export default {
+      onChildLoaded() {
+        console.log('the child component dispatched the on loaded event!')
+      }
+    }
+  </script>
+</my-component>
+```
+
+```html
+<my-child>
+  <figure>
+    <img src="path/to/the/image.jpg" onloaded={props.onLoaded}/>
+  </figure>
+</my-child>
+```
+
+### Virtual tags
+
+The `<virtual>` tag was removed and it can't be used anymore. I am planning to use the `<template>` tag instead for the `each` and `if` directives but at moment it's not yet part of the Riot.js 4 API.
 
 ## CLI
 

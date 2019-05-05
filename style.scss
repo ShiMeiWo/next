@@ -3,6 +3,7 @@
 ---
 // variables
 @import "vars";
+@import "utils";
 
 // vendor
 
@@ -17,6 +18,7 @@
 
 // components
 @import "footer";
+@import "theme-switcher";
 @import "pong";
 @import "banner";
 @import "highlight";

@@ -4,7 +4,7 @@
   border-right: 1px solid $paper-white;
 
 
-  @media (prefers-color-scheme: dark) {
+  @include at-root('body.dark') {
     background: $carbon-black;
     border-right: 1px solid $light-carbon-grey;
   }
@@ -74,7 +74,7 @@
         padding: 0.2rem 0;
         color: $dark-grey;
 
-        @media (prefers-color-scheme: dark) {
+        @include at-root('body.dark') {
           color: lighten($carbon-black, 75%);
         }
 

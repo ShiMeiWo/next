@@ -11,7 +11,7 @@
     &::-webkit-progress-bar {
       background: $paper-white;
 
-      @media (prefers-color-scheme: dark) {
+      @include at-root('body.dark') {
         background: $light-carbon-grey;
       }
     }
@@ -24,7 +24,7 @@
     margin-top: 0.2rem;
     color: $primary;
 
-    @media (prefers-color-scheme: dark) {
+    @include at-root('body.dark') {
       background-color: $light-carbon-grey;
     }
 

@@ -2,7 +2,7 @@
   margin: 4rem 0 0;
   border-top: 0.1rem solid $paper-white;
 
-  @media (prefers-color-scheme: dark) {
+  @include at-root('body.dark') {
     border-top-color: $light-carbon-grey;
   }
 

@@ -8,7 +8,7 @@ body {
   color: $dark-grey;
   line-height: 1.4;
 
-  @media (prefers-color-scheme: dark) {
+  @at-root .dark {
     background: $carbon-black;
     color: $white;
   }
@@ -133,7 +133,7 @@ a {
     color: darken($primary, 10%);
     text-decoration: underline;
 
-    @media (prefers-color-scheme: dark) {
+    @include at-root('body.dark') {
       color: lighten($primary, 5%);
     }
   }
@@ -152,7 +152,7 @@ li code, p code {
   background-color: $paper-white;
   border-radius: 3px;
 
-  @media (prefers-color-scheme: dark) {
+  @include at-root('body.dark') {
     color: lighten($carbon-black, 75%);
     background-color: lighten($carbon-black, 4%);
   }
@@ -172,7 +172,7 @@ blockquote {
   text-indent: -4rem;
   hyphens: auto;
 
-  @media (prefers-color-scheme: dark) {
+  @include at-root('body.dark') {
     border-left-color: $light-carbon-grey;
     background-color: lighten($carbon-black, 4%);
   }
