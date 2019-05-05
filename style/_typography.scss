@@ -153,9 +153,11 @@ li, p {
     background-color: $paper-white;
     border-radius: 3px;
 
-    @at-root body.dark code {
-      color: lighten($carbon-black, 75%);
-      background-color: lighten($carbon-black, 4%);
+    @at-root body.dark {
+      li code, p code {
+        color: lighten($carbon-black, 75%);
+        background-color: lighten($carbon-black, 4%);
+      }
     }
   }
 }
