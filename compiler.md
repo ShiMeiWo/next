@@ -107,7 +107,7 @@ Remember that the riot compiler outputs javascript modules and you might want to
 
 You can precompile Riot.js files also via the [`riot`](https://github.com/riot/cli) executable, which can be installed with NPM as follows:
 
-``` sh
+```sh
 npm install @riotjs/cli -g
 ```
 
@@ -115,7 +115,7 @@ npm install @riotjs/cli -g
 
 Here is how `riot` command works:
 
-``` sh
+```sh
 # compile a file to current folder
 riot some.riot
 
@@ -136,7 +136,7 @@ For more information, type: `riot --help`
 
 You can watch directories and automatically transform files when they are changed.
 
-``` sh
+```sh
 # watch for
 riot -w src -o dist
 ```
@@ -146,7 +146,7 @@ riot -w src -o dist
 
 You're free to use any file extension for your tags (instead of default `.riot`):
 
-``` sh
+```sh
 riot --extension html
 ```
 
@@ -154,7 +154,7 @@ riot --extension html
 
 You can use a config file to store and configure easily all your `@riotjs/cli` options and create your custom parsers
 
-``` sh
+```sh
 riot --config riot.config src
 ```
 
@@ -215,6 +215,25 @@ export default {
   }
 }
 ```
+
+#### Build your whole application
+
+You can also use the CLI to bundle your entire application.
+
+The `app.js` file:
+
+```js
+import {component} from 'riot'
+import App from './app.riot'
+
+component(App)(document.getElementById('root'))
+```
+
+```sh
+riot app.js -o dist/app.js
+```
+
+Your `dist/app.js` file will contain all the Riot.js components imported in your application and the code to run it.
 
 ## Pre-processors
 

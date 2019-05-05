@@ -457,4 +457,24 @@ The `<virtual>` tag was removed and it can't be used anymore. I am planning to u
 
 ## CLI
 
+The new CLI is much more powerful than the older one since it can compile single tags but it can also bundle your [entire Riot.js application]({{ '/compiler/'|prepend:site.baseurl }}#build-your-whole-application).
+
+It's designed to simplify the components bundling for quick prototypes and demos however for bigger application it's recommended the use of highly customizable javascript bundlers together with [riot loaders]({{ '/compiler/'|prepend:site.baseurl }}#riot-loaders)
+
+### Installation
+
+In Riot.js v3 it was possible to install the CLI via `npm i -g riot`. In Riot.js 4 it was removed from the `riot` npm package and you will need to install it separately via `npm i -g @riotjs/cli`.
+
+### Components registration
+
+You need to be aware that it previously was automatically registering your Riot.js components but now it will just output them as javascript modules. You will need to register your javascript output by yourself:
+
+```js
+// compiled Riot.js component
+import MyComponent from './my-component.js'
+import {register} from 'riot'
+
+register('my-component', MyComponent)
+```
+
 ## Compiler
