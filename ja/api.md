@@ -695,12 +695,12 @@ Riot.js はその関数の戻り値が `true` の場合にのみ、コンポー�
 
 ### ヘルパー
 
-Any Riot.js component provides two helpers to query DOM nodes contained in its rendered template.
+どんな Riotjs コンポーネントにも、レンダリングされたテンプレートに含まれる DOM ノードを照会するための2つのヘルパーが用意されています。
 
- - `component.$(selector: string): HTMLElement` - returns a single node located in the component markup
- - `component.$$(selector: string): [HTMLElemet]` - returns all the DOM nodes matched by the selector containing the component markup
+ - `component.$(selector: string): HTMLElement` - コンポーネントのマークアップにある1つのノードを返す
+ - `component.$$(selector: string): [HTMLElemet]` - コンポーネントのマークアップを含むセレクタに一致するすべての DOM ノードを戻す
 
-You can use the component helpers for doing simple DOM queries:
+コンポーネントヘルパーを使用して簡単な DOM クエリを実行できます:
 
 ```html
 <my-component>
@@ -713,11 +713,11 @@ You can use the component helpers for doing simple DOM queries:
   <script>
     export default {
       onMounted() {
-        // queries
+        // クエリ
         const ul = this.$('ul')
         const lis = this.$$('li')
 
-        // do something with the DOM nodes
+        // DOM ノードでなにかする
         const lisWidths = lis.map(li => li.offsetWidth)
         const {top, left} = ul.getBoundingClientRect()
       }
