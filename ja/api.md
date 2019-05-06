@@ -728,11 +728,11 @@ Riot.js はその関数の戻り値が `true` の場合にのみ、コンポー�
 
 ### 手動でのタグ構築
 
-Riot.js components are meant to be compiled to javascript via [@riotjs/compiler](/compiler). However you can build them manually with any rendering engine you like.
+Riot.jsコンポーネントは [@riotjs/compiler](/ja/compiler) を使って javascript にコンパイルされるようになっています。ただし、あなたの好きな任意のレンダリングエンジンを使用して手動でビルドすることもできます。
 
-#### Component shell interface
+#### コンポーネントシェルインターフェース
 
-The Riot.js compiler just creates a shell object that will be transformed internally by riot to create the [component object](#component-interface). If want to build this shell object manually it's worth to understand its interface first:
+Riot.js コンパイラは、単に [コンポーネントオブジェクト](#コンポーネントインターフェース) を作成するために、riot によって内部的に変換されるシェルオブジェクトを作成する。このシェルオブジェクトを手動で作成する場合は、まずそのインターフェースを理解する必要があります:
 
 ```ts
 interface RiotComponentShell {
@@ -743,16 +743,16 @@ interface RiotComponentShell {
 }
 ```
 
-The `RiotComponentShell` object consists of 4 properties:
+`RiotComponentShell` オブジェクトは4つのプロパティで構成されています:
 
-- `css` - the component css as string
-- `exports` - the component `export default` public API
-- `name` - the component name
-- `template` - the factory function to manage the component template
+- `css` - コンポーネントの css  の文字列
+- `exports` - コンポーネントのパブリック API `export default`
+- `name` - コンポーネント名
+- `template` - コンポーネントテンプレートを管理するファクトリ機能
 
-#### Template interface
+#### テンプレートインターフェース
 
-The template function should return an interface compatible to the following one:
+テンプレート関数は、次のものと互換性のあるインタフェースを返す必要があります:
 
 ```ts
 interface RiotComponentTemplate {
@@ -764,17 +764,17 @@ interface RiotComponentTemplate {
 }
 ```
 
-The `RiotComponentTemplate` is an object and it's responsible to handle the component rendering:
+`RiotComponentTemplate` はオブジェクトであり、レスポンシブルにコンポーネントのレンダリングを処理します:
 
-- `update` - method that will receive the component data and must be used to update the template
-- `mount` - method that must be used to connect the component template to a DOM node
-- `createDOM` - factory function might be needed to create the template DOM structure only once
-- `unmount` - method to clean up the component DOM
-- `clone` - method might be needed to clone the original template object in order to work with multiple instances
+- `update` - メソッド: コンポーネントデータを受け取り、テンプレートの更新に使用する必要がある
+- `mount` - メソッド: コンポーネントテンプレートを DOM ノードに接続するために使用する必要がある
+- `createDOM` - ファクトリ関数: テンプレート DOM の構造を一度だけ作成する必要がある場合がある
+- `unmount` -  メソッド: コンポーネントDOMをクリーンアップする
+- `clone` - メソッド: 複数のインスタンスを操作するためにオリジナルのテンプレートオブジェクトのクローンを作成する必要がある場合がある
 
-#### Examples
+#### 例
 
-This example uses the [@riotjs/dom-bindings (riot core template engine)](https://github.com/riot/dom-bindings)
+この例では [@riotjs/dom-bindings (riot core template engine)](https://github.com/riot/dom-bindings) を使用しています。
 
 ```js
 import { template, expressionTypes } from '@riotjs/dom-bindings'
@@ -802,10 +802,10 @@ riot.register('my-component', {
 })
 ```
 
-Read about the [template engine API](https://github.com/riot/dom-bindings)
+[テンプレートエンジン API](https://github.com/riot/dom-bindings) についてご参照ください。
 
-You can also use any other kind of template engine if you like.
-This example uses [lit-html](https://lit-html.polymer-project.org/) as template engine
+必要に応じて、あなたの好きな他の種類のテンプレートエンジンを使用することもできます。
+この例ではテンプレートエンジンとして [lit-html](https://lit-html.polymer-project.org/) を使用しています。
 
 ```js
 import {html, render} from 'lit-html'
@@ -841,9 +841,9 @@ riot.register('my-component', {
 })
 ```
 
-#### Tags without template
+#### テンプレートなしのタグ
 
-You can also create "wrapper tags" without any template as follows:
+次のように、テンプレートなしで "ラッパータグ" を作成することもできます:
 
 ``` js
 riot.register('my-component', {
@@ -857,7 +857,7 @@ riot.register('my-component', {
 
 ```
 
-In this case anytime you will mount a tag named `my-component` riot will leave the component markup as it is without parsing it:
+この場合、`my-component` という名前のタグをマウントすると、riot はコンポーネントのマークアップを解析せずにそのままにするでしょう:
 
 ```html
 <html>
@@ -869,4 +869,4 @@ In this case anytime you will mount a tag named `my-component` riot will leave t
 </html>
 ```
 
-This technique might be used to enhance serverside rendered templates.
+このテクニックはおそらくサーバーサイドでレンダリングされたテンプレートを強化するために使用されます。
