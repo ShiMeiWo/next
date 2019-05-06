@@ -147,7 +147,7 @@ import MyComponent from './my-component.riot'
 register('my-component', MyComponent)
 
 // `<my-component>` を呼ばれるすべての DOM ノードを検索し
-// 既に登録したコンポーネントと一緒にマウントします
+// 既に登録したコンポーネントと一緒にマウントする
 mount('my-component')
 ```
 
@@ -177,7 +177,7 @@ expect(component.root.querySelector('p')).to.be.ok
 // tag を登録解除
 unregister('test-component')
 
-// 異なるテンプレートを利用して同じコンポーネントを再生性
+// 異なるテンプレートを利用して同じコンポーネントを再生成
 register('test-component', TestComponent2)
 ```
 
@@ -218,7 +218,7 @@ register('test-component', TestComponent2)
 TypeScript に詳しい人は、ここに書かれているように Riot.js コンポーネントインタフェースがどのように見えるを読むことができます:
 
 ```ts
-// このインターフェースはただ後悔されているのみで、どんな Riot コンポーネントも以下のプロパティを受け取ります
+// このインターフェースはただ公開されているのみで、どんな Riot コンポーネントも以下のプロパティを受け取る
 interface RiotCoreComponent {
   // 任意のコンポーネントインスタンスで自動的に生成
   props: object;
@@ -239,7 +239,7 @@ interface RiotCoreComponent {
   $$(selector: string): [HTMLElement];
 }
 
-// パブリックな RiotComponent インターフェースのプロパティはすべてオプショナルです
+// パブリックな RiotComponent インターフェースのプロパティはすべてオプショナル
 interface RiotComponent extends RiotCoreComponent {
   // コンポーネントオブジェクトでオプショナル
   state?: object;
@@ -348,7 +348,7 @@ myComponent.unmount(true)
 
 #### component.state
 
-Any Riot.js component created has a `state` object property. The `state` object is meant to store all the mutable component properties. For example:
+生成された Riot.js コンポーネントには `state` というオブジェクトプロパティがあります。`state` オブジェクトは、すべての可変なコンポーネントプロパティを格納することを目的としています。例:
 
 ```html
 <my-component>
@@ -356,7 +356,7 @@ Any Riot.js component created has a `state` object property. The `state` object 
 
   <script>
     export default {
-      // initial component state
+      // コンポーネントステートの初期化
       state: {
         message: 'hi'
       }
@@ -365,9 +365,10 @@ Any Riot.js component created has a `state` object property. The `state` object 
 </my-component>
 ```
 
-In this case the component is created with an initial state that can be modified internally via `component.update`.
+この場合、初期状態のステートと一緒にコンポーネントが生成され、`component.update` を使用して内部的に修正できます。
 
-You should avoid to store nested javascript objects into the state property because their references will be shared across multiple component and might generate side effects. To avoid undesired surprises you can create your components also using a factory function
+ネストされた javascript のオブジェクトをステートプロパティに格納することは避けてください。なぜなら、ネストされた javascript の参照は複数のコンポーネントで共有され、副作用が発生する可能性があるからです。予期しない事態を避けるために、ファクトリ関数を使用してコンポーネントを生成することもできます
+
 
 ```html
 <my-component>
@@ -375,9 +376,9 @@ You should avoid to store nested javascript objects into the state property beca
 
   <script>
     export default function MyComponent() {
-      // remember to return an object
+      // オブジェクトを返すことを覚えておく
       return {
-        // the initial state will be always fresh created avoiding surprises
+        // 初期状態のステートは、驚きを避けるために常に新しく作られる
         state: {
           nested: {
             properties: 'are ok now'
@@ -390,21 +391,21 @@ You should avoid to store nested javascript objects into the state property beca
 </my-component>
 ```
 
-Riot.js will automatically call the function anytime a new component will be mounted.
+新しいコンポーネントがマウントされると、Riot.js は自動的に関数を呼び出します。
 
 #### component.components
 
-If you want to avoid registering global Riot.js components you can map your children components directly on your component object. For example:
+グローバルに Riot.js のコンポーネントを登録したくない場合、子コンポーネントをコンポーネントオブジェクトに直接マッピングすることができます。例:
 
 ```html
 <my-component>
-  <!-- this component is only available in `<my-component>` -->
+  <!-- このコンポーネントは `<my-component>` 内でのみ利用可能 -->
   <my-child/>
 
-  <!-- this component is named differently and was aliased -->
+  <!-- このコンポーネントには別の名前が付けられ、エイリアスが設定される -->
   <aliased-name/>
 
-  <!-- this component was already registered via riot.register -->
+  <!-- このコンポーネントは riot.register を介して既に登録されている -->
   <global-component/>
 
   <script>
@@ -422,14 +423,14 @@ If you want to avoid registering global Riot.js components you can map your chil
 ```
 
 <div class="note note--info">
-  For this example we assume that you are bundling your application via webpack, rollup, parcel or browserify
+  この例では、webpack, rollup, parcel, browserify を介してアプリケーションをバンドルすることを想定しています
 </div>
 
 #### component.update
 
 `component.update(newState?:object, parentScope?: object): RiotComponent;`
 
-Updates the component `state` object re-rendering all its expressions. This method can be usually called every time an event handler is dispatched when the user interacts with the application.
+コンポーネントの `state` オブジェクトを更新し、すべてのテンプレート変数を再レンダリングします。このメソッドは通常、ユーザーがアプリケーションと対話するときにイベントハンドラがディスパッチされるたびに呼び出すことができます:
 
 ``` html
 <my-component>
@@ -450,7 +451,7 @@ Updates the component `state` object re-rendering all its expressions. This meth
 </my-component>
 ```
 
-You can call this method also manually whenever you need to update your components UI. This typically happens after some non-UI related event: after `setTimeout`, AJAX call or on some server event. For example:
+このメソッドは、コンポーネントの UI を更新する必要があるときに、手動で呼び出すこともできます。これは通常 UI に関連しないイベント（`setTimeout` の後、AJAX のコール、または何らかのサーバーのイベント）の後に発生します。例:
 
 ``` html
 <my-component>
@@ -465,7 +466,7 @@ You can call this method also manually whenever you need to update your componen
           const {username} = this.props
           const response = await fetch(`/validate/username/${username}`)
           const json = response.json()
-          // do something with the response
+          // レスポンスで何かをする
         } catch (error) {
           this.update({
             error: error.message
@@ -477,10 +478,10 @@ You can call this method also manually whenever you need to update your componen
 </my-component>
 ```
 
-On above example the error message is displayed on the UI after the `update()` method has been called.
+上記の例では、`update()` メソッドがコールされた後に UI 上にエラーメッセージが表示されます。
 
-If you want to have more control over your tags DOM updates you can set rely on the `shouldUpdate` function return.
-Riot.js will update your component only if that function will return `true`
+タグの DOM 更新をより細かくコントロールしたい場合、`shouldUpdate` 関数の戻り値を利用して設定できます。
+Riot.js はその関数の戻り値が `true` の場合にのみ、コンポーネントを更新します。
 
 ``` html
 <my-component>
@@ -497,9 +498,9 @@ Riot.js will update your component only if that function will return `true`
         })
       },
       shouldUpdate(newProps, currentProps) {
-        // do not update
+        // 更新しない
         if (this.state.message === 'goodbye') return false
-        // if this.state.message is different from 'goodbye' we could update the component
+        // this.state.message が 'goodbye' と異なる場合、コンポーネントを更新可能
         return true
       }
     }
@@ -509,7 +510,7 @@ Riot.js will update your component only if that function will return `true`
 </my-component>
 ```
 
-The `shouldUpdate` method will always receive 2 arguments: the first one contains the new component properties and the second argument the current ones.
+`shouldUpdate` メソッドは常に2つの引数を受け取ります。最初の引数には新しいコンポーネントプロパティが含まれ、2番目の引数には現在のプロパティが含まれます。
 
 ``` html
 <my-component>
@@ -536,7 +537,7 @@ The `shouldUpdate` method will always receive 2 arguments: the first one contain
   <script>
     export default {
       shouldUpdate(newProps, currentProps) {
-        // update the DOM depending on the new properties received
+        // 受け取った新しいプロパティに応じて DOM を更新
         return newProps.message !== 'goodbye'
       }
     }
