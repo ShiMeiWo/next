@@ -549,8 +549,8 @@ Riot.js はその関数の戻り値が `true` の場合にのみ、コンポー�
 
 ###  スロット
 
-The `<slot>` tag is a special Riot.js core feature that allows you to inject and compile the content of any custom component inside its template in runtime.
-For example using the following riot tag `my-post`
+`<slot>` タグは、実行時にテンプレート内の任意のカスタムコンポーネントの内容を注入してコンパイルすることができる、Riot.js の特別なコア機能です。
+例えば以下の riot タグ `my-post` 使ってみましょう
 
 ``` html
 <my-post>
@@ -559,7 +559,7 @@ For example using the following riot tag `my-post`
 </my-post>
 ```
 
-anytime you will include the `<my-post>` tag in your app
+いつもアプリケーションに `<my-post>` タグを入れることになるでしょう
 
 ``` html
 <my-post title="What a great title">
@@ -567,7 +567,7 @@ anytime you will include the `<my-post>` tag in your app
 </my-post>
 ```
 
-once mounted it will be rendered in this way:
+一度マウントされると、このようにレンダリングされます:
 
 ``` html
 <my-post>
@@ -576,17 +576,17 @@ once mounted it will be rendered in this way:
 </my-post>
 ```
 
-The expressions in slot tags will not have access to the properties of the components in which they are injected
+スロットタグ内の式は、挿入されるコンポーネントのプロパティにアクセスできません
 
 ``` html
-<!-- This tag just inherits the yielded DOM -->
+<!-- このタグは生成された DOM を継承するだけ -->
 <child-tag>
   <slot/>
 </child-tag>
 
 <my-component>
   <child-tag>
-    <!-- here the child-tag internal properties are not available -->
+    <!-- ここでは子タグの内部プロパティは使用不可 -->
     <p>{ message }</p>
   </child-tag>
   <script>
@@ -597,11 +597,11 @@ The expressions in slot tags will not have access to the properties of the compo
 </my-component>
 ```
 
-#### Named Slots
+#### 名前付きスロット
 
-The `<slot>` tag provides also a mechanism to inject html in specific sections of a component template
+`<slot>` タグは、コンポーネントテンプレートの特定のセクションにhtmlを挿入するメカニズムも提供します。
 
-For example using the following riot tag `my-other-post`
+例えば以下の riot タグ `my-other-post` 使ってみましょう
 
 ``` html
 <my-other-post>
@@ -615,7 +615,7 @@ For example using the following riot tag `my-other-post`
 </my-other-post>
 ```
 
-anytime you will include the `<my-other-post>` tag in your app
+いつもアプリケーションに `<my-other-post>` タグを入れることになるでしょう
 
 ``` html
 <my-other-post title="What a great title">
@@ -628,7 +628,7 @@ anytime you will include the `<my-other-post>` tag in your app
 </my-other-post>
 ```
 
-once mounted it will be rendered in this way:
+一度マウントされると、このようにレンダリングされます:
 
 ``` html
 <my-other-post>
