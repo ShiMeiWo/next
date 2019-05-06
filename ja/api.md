@@ -207,7 +207,7 @@ register('test-component', TestComponent2)
   - `onBeforeUpdate` - コンポーネントの更新前にコールされる
   - `onUpdated` - コンポーネントの更新が完了した後にコールされる
   - `onBeforeUnmount` - コンポーネントが削除される前にコールされる
-  - `onUnmounted` - コンポーネントの削除が完了した後にコールされる
+  - `onUnmounted` - コンポーネントの削除が完了した時にコールされる
 - [ヘルパー](#ヘルパー)
   - `$` - `document.querySelector` に似たメソッド
   - `$$` - `document.querySelectorAll` に似たメソッド
@@ -646,16 +646,16 @@ Riot.js はその関数の戻り値が `true` の場合にのみ、コンポー�
 
 ### ライフサイクル
 
-Each component object can rely on the following callbacks to handle its internal state:
+各コンポーネントオブジェクトは、次のコールバックに依存して内部状態を処理できます:
 
-  - `onBeforeMount` - called before the component will be mounted
-  - `onMounted` - called after the component has rendered
-  - `onBeforeUpdate` - called before the component will be updated
-  - `onUpdated` - called after the component has been updated
-  - `onBeforeUnmount` - called before the component will be removed
-  - `onUnmounted` - called once the component has been removed
+  - `onBeforeMount` - コンポーネントがマウントされる前にコールされる
+  - `onMounted` - コンポーネントがレンダリングされた後にコールされる
+  - `onBeforeUpdate` - コンポーネント更新される前にコールされる
+  - `onUpdated` - コンポーネントが更新された後にコールされる
+  - `onBeforeUnmount` - コンポーネントが削除される前にコールされる
+  - `onUnmounted` - コンポーネントの削除が完了した時にコールされる
 
-For example:
+例:
 
 ```html
 <my-component>
@@ -673,7 +673,7 @@ For example:
 </my-component>
 ```
 
-All the lifecycle methods will receive 2 arguments `props` and `state`, they are aliases of the `this.props` and `this.state` component attributes.
+すべてのライフサイクルメソッドは、`props` と `state` の2つの引数を受け取ります。これらの引数は `this.props` と `this.state` というコンポーネント属性のエイリアスです。
 
 ```html
 <my-component>
